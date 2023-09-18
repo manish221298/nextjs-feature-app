@@ -37,13 +37,3 @@ export async function GET() {
     return NextResponse.json({ err: err.message });
   }
 }
-
-// update todo data put api
-// export async function PUT(request) {
-//   const body = await request.json();
-
-//   try {
-//   } catch (err) {
-//     return NextResponse.json({ err: err.message });
-//   }
-// }

@@ -20,17 +20,27 @@ const FormPage = ({ filteredData, setFilteredData }) => {
       text: text,
     };
 
-    axios
-      .post(`/api/users/createtodo`, formData)
-      .then((res) => {
-        if (res.data) {
-          setFilteredData("");
-          router.push("/todolist");
-        }
-      })
-      .catch((err) => console.log(err.response));
-
-    // setTodos([...todos, { ...formData }]);
+    if (filteredData?._id) {
+      axios
+        .put(`/api/users/createtodo/${filteredData?._id}`, formData)
+        .then((res) => {
+          if (res.data) {
+            setFilteredData("");
+            router.push("/todolist");
+          }
+        })
+        .catch((err) => console.log(err.response));
+    } else {
+      axios
+        .post(`/api/users/createtodo`, formData)
+        .then((res) => {
+          if (res.data) {
+            router.push("/todolist");
+            setFilteredData("");
+          }
+        })
+        .catch((err) => console.log(err.response));
+    }
   };
 
   return (

@@ -42,7 +42,12 @@ export async function DELETE(request, content) {
   const id = content.params.id;
   try {
     const data = await Todo.findByIdAndDelete(id);
-    return NextResponse.json(data);
+    if (data) {
+      return NextResponse.json({
+        message: "Deleted successfully",
+        success: true,
+      });
+    }
   } catch (err) {
     return NextResponse.json(
       { err: err.message, success: false },
